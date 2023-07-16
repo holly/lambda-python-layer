@@ -22,4 +22,4 @@ fi
 aws lambda publish-layer-version \
 --layer-name $LAMBDA_LAYER_NAME \
 --zip-file fileb://$ZIPFILE \
---compatible-runtimes python3.8 python3.9
+--compatible-runtimes python3.8 python3.9 python3.10
