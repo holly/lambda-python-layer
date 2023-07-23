@@ -3,9 +3,8 @@
 set -e
 #set -u
 
-APP=$(basename $PWD)
-ZIPFILE=$PWD/tmp/lambda_layer.zip
-
+LAMBDA_LAYER_NAME=$(basename $PWD | sed -e 's/^lambda\-//')
+LAMBDA_ZIP_ARCHIVE=$PWD/lambda-python-layer.zip
 LAYER_DESCRIPTION="for python lambda library"
 
 export AWS_PAGER=""
@@ -15,11 +14,8 @@ fi
 if [ -z "$AWS_DEFAULT_PROFILE"  ]; then
 	export AWS_DEFAULT_PROFILE=default
 fi
-if [ -z "$LAMBDA_LAYER_NAME"  ]; then
-	LAMBDA_LAYER_NAME=$(echo $APP | sed -e 's/^lambda\-//')
-fi
 
 aws lambda publish-layer-version \
 --layer-name $LAMBDA_LAYER_NAME \
---zip-file fileb://$ZIPFILE \
+--zip-file fileb://$LAMBDA_ZIP_ARCHIVE \
 --compatible-runtimes python3.8 python3.9 python3.10
