@@ -4,3 +4,4 @@ Jinja2
 redis
 pytz
 BeautifulSoup4
+feedparser
